@@ -1,0 +1,57 @@
+{
+    "base_pacakge":"com.terapico.shuxiang",
+    "user_context":"ShuxiangUserContext",
+    "actions":[
+        {
+            "name":"customerRegisterCampaign",
+            "manager":"campaign",
+            "diction":{
+                "customer":"用户",
+                "campaign":"活动"
+            },
+            "actors":["customer", "campaign"],
+            "touched_objects":[
+                {   "role_name": "record",
+                    "type_name": "campaignRegisterHistory",
+                    "scope_token":"empty()"
+                }
+            ]
+        },
+        {
+            "name":"customerUnregisterCampaign",
+            "manager":"campaign",
+            "diction":{
+                "customer":"用户",
+                "campaign":"活动"
+            },
+            "actors":["customer", "campaign"],
+            "touched_objects":[
+                {   "role_name": "record",
+                    "type_name": "campaignRegisterHistory",
+                    "scope_token":"empty()"
+                }
+            ]
+        },
+        {
+            "name":"customerReviewCampaign",
+            "manager":"campaign",
+            "diction":{
+                "customer":"用户",
+                "campaign":"活动"
+            },
+            "actors":["customer", "campaign"],
+            "inputs":[
+                {
+                    "role_name": "reviewContent",
+                    "type_name": "String"
+                }
+            ],
+            "touched_objects":[
+                {   "role_name": "review",
+                    "type_name": "campaignReview",
+                    "scope_token":"empty()"
+                }
+            ]
+        }
+    ]
+}

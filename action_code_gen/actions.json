@@ -1,0 +1,67 @@
+{
+    "base_pacakge":"com.terapico.shuxiang",
+    "user_context":"ShuxiangUserContext",
+    "actions":[
+        {
+            "name":"customerBorrowBook",
+            "manager":"bookCopy",
+            "diction":{
+                "customer":"用户",
+                "bookCopy":"借阅图书",
+                "BORROW_BOOK":"借阅图书",
+                "AT000002":"购买图书"
+            },
+            "actors":["customer", "bookCopy"],
+            "comsume_tokens":{
+                "customer":["BORROW_BOOK"]
+            },
+            "touched_objects":[
+                {   "role_name": "record",
+                    "type_name": "borrowingHistory",
+                    "scope_token":"empty()"
+                },
+                {   "role_name": "borrowed",
+                    "type_name": "bookCopy",
+                    "scope_token":"empty()"
+                }
+            ]
+        },
+        {
+            "name":"customerReturnBook",
+            "manager":"bookCopy",
+            "diction":{
+                "customer":"用户",
+                "bookCopy":"借阅图书",
+                "BORROW_BOOK":"借阅图书",
+                "store":"门店",
+                "employee":"门店员工"
+            },
+            "actors":["customer", "bookCopy", "store", "employee"],
+            "produce_tokens":{
+                "customer":["BORROW_BOOK"]
+            },
+            "touched_objects":[
+                {   "role_name": "record",
+                    "type_name": "borrowingHistory",
+                    "scope_token":"empty()"
+                },
+                {   "role_name": "expireBill",
+                    "type_name": "borrowingExpiredSku",
+                    "scope_token":"empty()"
+                },
+                {   "role_name": "returned",
+                    "type_name": "bookCopy",
+                    "scope_token":"empty()"
+                },
+                {   "role_name": "order",
+                    "type_name": "mainOrder",
+                    "scope_token":"start().withMainOrderPaymentList().withLineItemList().done()"
+                },
+                {   "role_name": "transferRecord",
+                    "type_name": "bookCopyTransfer",
+                    "scope_token":"empty()"
+                }
+            ]
+        }
+    ]
+}
