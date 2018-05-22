@@ -1,1 +1,1 @@
-~/tools/codeGen.sh . actionMethods.java.ftl campaign-actions.json poc_campaign_action.java
+~/tools/codeGen.sh . actionMethods.java.ftl actions.json poc_action.java
