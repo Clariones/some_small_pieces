@@ -41,7 +41,12 @@
         // 这里使用 !=null 而不是 instanceof 判断，是为了及早暴露逻辑错误
         object = touchedObjects.get("record");
         if (object != null){
-            userContext.getDAOGroup().getCampaignRegisterHistoryDAO().save((CampaignRegisterHistory)object, CampaignRegisterHistoryTokens.empty());
+            CampaignRegisterHistory campaignRegisterHistory= (CampaignRegisterHistory)object;
+            boolean isNewCreate = campaignRegisterHistory.getVersion() == 0;
+            userContext.getDAOGroup().getCampaignRegisterHistoryDAO().save(campaignRegisterHistory, CampaignRegisterHistoryTokens.empty());
+            if (isNewCreate){
+                userContext.getManagerGroup().getCampaignRegisterHistoryManager().onNewInstanceCreated(userContext, campaignRegisterHistory);
+            }
         }
     }
     // send notifications of action CustomerRegisterCampaign
@@ -105,7 +110,12 @@
         // 这里使用 !=null 而不是 instanceof 判断，是为了及早暴露逻辑错误
         object = touchedObjects.get("record");
         if (object != null){
-            userContext.getDAOGroup().getCampaignRegisterHistoryDAO().save((CampaignRegisterHistory)object, CampaignRegisterHistoryTokens.empty());
+            CampaignRegisterHistory campaignRegisterHistory= (CampaignRegisterHistory)object;
+            boolean isNewCreate = campaignRegisterHistory.getVersion() == 0;
+            userContext.getDAOGroup().getCampaignRegisterHistoryDAO().save(campaignRegisterHistory, CampaignRegisterHistoryTokens.empty());
+            if (isNewCreate){
+                userContext.getManagerGroup().getCampaignRegisterHistoryManager().onNewInstanceCreated(userContext, campaignRegisterHistory);
+            }
         }
     }
     // send notifications of action CustomerUnregisterCampaign
@@ -169,7 +179,12 @@
         // 这里使用 !=null 而不是 instanceof 判断，是为了及早暴露逻辑错误
         object = touchedObjects.get("review");
         if (object != null){
-            userContext.getDAOGroup().getCampaignReviewDAO().save((CampaignReview)object, CampaignReviewTokens.empty());
+            CampaignReview campaignReview= (CampaignReview)object;
+            boolean isNewCreate = campaignReview.getVersion() == 0;
+            userContext.getDAOGroup().getCampaignReviewDAO().save(campaignReview, CampaignReviewTokens.empty());
+            if (isNewCreate){
+                userContext.getManagerGroup().getCampaignReviewManager().onNewInstanceCreated(userContext, campaignReview);
+            }
         }
     }
     // send notifications of action CustomerReviewCampaign

@@ -3,62 +3,52 @@
     "user_context":"ShuxiangUserContext",
     "actions":[
         {
-            "name":"customerBorrowBook",
-            "manager":"bookCopy",
+            "name":"customerRegisterCampaign",
+            "manager":"campaign",
             "diction":{
                 "customer":"用户",
-                "bookCopy":"借阅图书",
-                "BORROW_BOOK":"借阅图书",
-                "AT000002":"购买图书"
+                "campaign":"活动"
             },
-            "actors":["customer", "bookCopy"],
-            "comsume_tokens":{
-                "customer":["BORROW_BOOK"]
-            },
+            "actors":["customer", "campaign"],
             "touched_objects":[
                 {   "role_name": "record",
-                    "type_name": "borrowingHistory",
-                    "scope_token":"empty()"
-                },
-                {   "role_name": "borrowed",
-                    "type_name": "bookCopy",
+                    "type_name": "campaignRegisterHistory",
                     "scope_token":"empty()"
                 }
             ]
         },
         {
-            "name":"customerReturnBook",
-            "manager":"bookCopy",
+            "name":"customerUnregisterCampaign",
+            "manager":"campaign",
             "diction":{
                 "customer":"用户",
-                "bookCopy":"借阅图书",
-                "BORROW_BOOK":"借阅图书",
-                "store":"门店",
-                "employee":"门店员工"
+                "campaign":"活动"
             },
-            "actors":["customer", "bookCopy", "store", "employee"],
-            "produce_tokens":{
-                "customer":["BORROW_BOOK"]
-            },
+            "actors":["customer", "campaign"],
             "touched_objects":[
                 {   "role_name": "record",
-                    "type_name": "borrowingHistory",
+                    "type_name": "campaignRegisterHistory",
                     "scope_token":"empty()"
-                },
-                {   "role_name": "expireBill",
-                    "type_name": "borrowingExpiredSku",
-                    "scope_token":"empty()"
-                },
-                {   "role_name": "returned",
-                    "type_name": "bookCopy",
-                    "scope_token":"empty()"
-                },
-                {   "role_name": "order",
-                    "type_name": "mainOrder",
-                    "scope_token":"start().withMainOrderPaymentList().withLineItemList().done()"
-                },
-                {   "role_name": "transferRecord",
-                    "type_name": "bookCopyTransfer",
+                }
+            ]
+        },
+        {
+            "name":"customerReviewCampaign",
+            "manager":"campaign",
+            "diction":{
+                "customer":"用户",
+                "campaign":"活动"
+            },
+            "actors":["customer", "campaign"],
+            "inputs":[
+                {
+                    "role_name": "reviewContent",
+                    "type_name": "String"
+                }
+            ],
+            "touched_objects":[
+                {   "role_name": "review",
+                    "type_name": "campaignReview",
                     "scope_token":"empty()"
                 }
             ]

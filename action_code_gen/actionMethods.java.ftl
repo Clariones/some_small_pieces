@@ -117,7 +117,12 @@
     <#list action.touched_objects as touched>
         object = touchedObjects.get("${touched.role_name}");
         if (object != null){
-            userContext.getDAOGroup().get${touched.type_name?cap_first}DAO().save((${touched.type_name?cap_first})object, ${touched.type_name?cap_first}Tokens.${touched.scope_token});
+            ${touched.type_name?cap_first} ${touched.type_name?uncap_first}= (${touched.type_name?cap_first})object;
+            boolean isNewCreate = ${touched.type_name?uncap_first}.getVersion() == 0;
+            userContext.getDAOGroup().get${touched.type_name?cap_first}DAO().save(${touched.type_name?uncap_first}, ${touched.type_name?cap_first}Tokens.${touched.scope_token});
+            if (isNewCreate){
+                userContext.getManagerGroup().get${touched.type_name?cap_first}Manager().onNewInstanceCreated(userContext, ${touched.type_name?uncap_first});
+            }
         }
     </#list>
     }
